@@ -50,7 +50,7 @@ public interface QuestObjective {
     /**
      * Sets the progress description of an objective. This describes what progress has
      * been made on an objective and/or what is required of an objective as it
-     * progresses. Supports Printf-style formatting, and is completely up to the
+     * progresses. Should support Printf-style formatting, and is completely up to the
      * implementation by implementing classes.
      * @param template The template for an objective progress body
      */
