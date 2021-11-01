@@ -1,0 +1,9 @@
+name: NTFramework
+version: '${version}'
+main: com.makotomiyamoto.nt.ntframework.NTFramework
+api-version: 1.17
+prefix: NebulaToxin
+load: STARTUP
+authors: [ MakotoMiyamoto ]
+description: Game mechanics framework for NebulaToxin.
+website: https://makotomiyamoto.com
