@@ -10,6 +10,8 @@ import java.util.Collection;
  * This class is extremely generic (no pun intended) and simply serves as
  * a frame for more sophisticated quest reward operations.
  * @param <RewardType> Type of reward, must be a {@link IReward}
+ *
+ * @author MakotoMiyamoto
  */
 public interface QuestCompletionReward<RewardType extends IReward> {
     /**
