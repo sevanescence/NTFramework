@@ -3,7 +3,7 @@ package com.makotomiyamoto.nt.ntframework.quest;
 /**
  * A template interface for quest objectives in the NT quest framework.
  * The types of objectives a quest has is completely up to the
- * implementations of QuestObjective, many trivial quest objectives
+ * implementations of QuestObjective; many trivial quest objectives
  * are already provided by the framework.
  *
  * @author MakotoMiyamoto
@@ -68,7 +68,7 @@ public interface QuestObjective {
      * it should be awarded when said objective is complete.
      * @return a quest completion reward
      */
-    QuestCompletionReward getQuestCompletionReward();
+    QuestCompletionReward<IReward> getQuestCompletionReward();
 
     /**
      * Returns the next quest objective. This should return null if this objective is the

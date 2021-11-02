@@ -4,7 +4,7 @@ public class Quest {
     private String title;
     private String description;
     private QuestObjective head;
-    private QuestCompletionReward questCompletionReward;
+    private QuestCompletionReward<? extends IReward> questCompletionReward;
 
     public String getTitle() {
         return title;
@@ -18,7 +18,7 @@ public class Quest {
         return head;
     }
 
-    public QuestCompletionReward getQuestCompletionReward() {
+    public QuestCompletionReward<? extends IReward> getQuestCompletionReward() {
         return questCompletionReward;
     }
 
@@ -34,7 +34,7 @@ public class Quest {
         this.head = head;
     }
 
-    public void setQuestCompletionReward(QuestCompletionReward questCompletionReward) {
+    public void setQuestCompletionReward(QuestCompletionReward<? extends IReward> questCompletionReward) {
         this.questCompletionReward = questCompletionReward;
     }
 }
