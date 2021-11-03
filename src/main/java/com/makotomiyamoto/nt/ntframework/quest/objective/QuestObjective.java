@@ -1,4 +1,7 @@
-package com.makotomiyamoto.nt.ntframework.quest;
+package com.makotomiyamoto.nt.ntframework.quest.objective;
+
+import com.makotomiyamoto.nt.ntframework.quest.reward.IReward;
+import com.makotomiyamoto.nt.ntframework.quest.reward.QuestCompletionReward;
 
 /**
  * A template interface for quest objectives in the NT quest framework.
@@ -68,7 +71,9 @@ public interface QuestObjective {
      * it should be awarded when said objective is complete.
      * @return a quest completion reward
      */
-    QuestCompletionReward<IReward> getQuestCompletionReward();
+    QuestCompletionReward<? extends IReward> getQuestCompletionReward();
+
+    void setQuestCompletionReward(QuestCompletionReward<? extends IReward> rewardQuestCompletionReward);
 
     /**
      * Returns the next quest objective. This should return null if this objective is the
@@ -76,4 +81,6 @@ public interface QuestObjective {
      * @return a quest objective
      */
     QuestObjective getNextObjective();
+
+    void setNextObjective(QuestObjective objective);
 }

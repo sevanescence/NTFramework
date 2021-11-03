@@ -1,21 +1,30 @@
 package com.makotomiyamoto.nt.ntframework.quest;
 
+import com.makotomiyamoto.nt.ntframework.NTFramework;
+import com.makotomiyamoto.nt.ntframework.quest.objective.QuestObjective;
+import com.makotomiyamoto.nt.ntframework.quest.reward.RewardFailedException;
 import org.bukkit.entity.Player;
 
-public class ActivePlayerQuest implements PlayerQuest<QuestObjective> {
-    private final Quest quest;
+public class ActivePlayerQuest implements PlayerQuest {
+    private final String questKey;
     private final Player player;
     private QuestObjective currentObjective;
 
-    public ActivePlayerQuest(Quest quest, Player player) {
-        this.quest = quest;
+    public ActivePlayerQuest(String questKey, Player player) {
+        this.questKey = questKey;
         this.player = player;
-        this.currentObjective = quest.getHead();
+        this.currentObjective = getQuest().getHead();
+    }
+
+    public ActivePlayerQuest(String questKey, Player player, QuestObjective currentObjective) {
+        this.questKey = questKey;
+        this.player = player;
+        this.currentObjective = currentObjective;
     }
 
     @Override
     public Quest getQuest() {
-        return quest;
+        return NTFramework.quests.get(questKey);
     }
 
     @Override
@@ -29,7 +38,7 @@ public class ActivePlayerQuest implements PlayerQuest<QuestObjective> {
     }
 
     @Override
-    public boolean advanceObjective() throws UnrewardableRewardException {
+    public boolean advanceObjective() throws RewardFailedException {
         if (currentObjective.getQuestCompletionReward() != null) {
             QuestUtils.grantQuestReward(currentObjective.getQuestCompletionReward(), player);
         }

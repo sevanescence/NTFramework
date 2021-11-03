@@ -1,5 +1,9 @@
 package com.makotomiyamoto.nt.ntframework.quest;
 
+import com.makotomiyamoto.nt.ntframework.quest.objective.QuestObjective;
+import com.makotomiyamoto.nt.ntframework.quest.reward.IReward;
+import com.makotomiyamoto.nt.ntframework.quest.reward.QuestCompletionReward;
+
 public class Quest {
     private String title;
     private String description;

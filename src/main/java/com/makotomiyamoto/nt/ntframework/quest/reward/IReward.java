@@ -1,4 +1,4 @@
-package com.makotomiyamoto.nt.ntframework.quest;
+package com.makotomiyamoto.nt.ntframework.quest.reward;
 
 import org.bukkit.entity.Player;
 

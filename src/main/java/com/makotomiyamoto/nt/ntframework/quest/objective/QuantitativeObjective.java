@@ -1,4 +1,4 @@
-package com.makotomiyamoto.nt.ntframework.quest;
+package com.makotomiyamoto.nt.ntframework.quest.objective;
 
 /**
  * A template interface which describes a quest objective whose premise

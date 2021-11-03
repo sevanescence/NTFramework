@@ -1,4 +1,6 @@
-package com.makotomiyamoto.nt.ntframework.quest;
+package com.makotomiyamoto.nt.ntframework.quest.reward;
+
+import com.makotomiyamoto.nt.ntframework.quest.reward.IReward;
 
 import java.util.Collection;
 
