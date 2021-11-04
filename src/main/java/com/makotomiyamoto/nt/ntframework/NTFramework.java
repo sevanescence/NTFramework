@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
+import java.util.List;
 
 public final class NTFramework extends JavaPlugin {
     public static HashMap<String, Quest> quests = new HashMap<>();
@@ -30,6 +31,9 @@ public final class NTFramework extends JavaPlugin {
         objective.setProgressBodyTemplate("Debris cleared: %d/%d");
         quest.setHead(objective);
         quests.put("story_GettingStarted", quest);
+        List<ItemReward> rewards = reward.getRewards();
+
+
     }
 
     @Override

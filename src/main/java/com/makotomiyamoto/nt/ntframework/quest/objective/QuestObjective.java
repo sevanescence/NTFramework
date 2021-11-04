@@ -4,10 +4,19 @@ import com.makotomiyamoto.nt.ntframework.quest.reward.IReward;
 import com.makotomiyamoto.nt.ntframework.quest.reward.QuestCompletionReward;
 
 /**
- * A template interface for quest objectives in the NT quest framework.
- * The types of objectives a quest has is completely up to the
- * implementations of QuestObjective; many trivial quest objectives
- * are already provided by the framework.
+ * <p>
+ *     A template interface for quest objectives in the NT quest framework.
+ *     The types of objectives a quest has is completely up to the
+ *     implementations of QuestObjective; many trivial quest objectives
+ *     are already provided by the framework.
+ * </p>
+ * <br/>
+ * <p>
+ *     <strong>NTF 1.1.1 </strong><br/>
+ *     Classes implementing {@link QuestObjective} should implement the
+ *     cloneable interface in order to shallow copy objectives to be
+ *     mutable for a player completing the objective.
+ * </p>
  *
  * @author MakotoMiyamoto
  */
@@ -83,4 +92,7 @@ public interface QuestObjective {
     QuestObjective getNextObjective();
 
     void setNextObjective(QuestObjective objective);
+
+    // enforcing NTF 1.1.1
+    Object clone() throws CloneNotSupportedException;
 }

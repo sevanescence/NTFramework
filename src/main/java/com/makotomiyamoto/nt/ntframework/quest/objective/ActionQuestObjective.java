@@ -3,7 +3,7 @@ package com.makotomiyamoto.nt.ntframework.quest.objective;
 import com.makotomiyamoto.nt.ntframework.quest.reward.IReward;
 import com.makotomiyamoto.nt.ntframework.quest.reward.QuestCompletionReward;
 
-public class ActionQuestObjective implements QuantitativeObjective {
+public class ActionQuestObjective implements QuantitativeObjective, Cloneable {
     private String name;
     private String description;
     private String progressTemplate;
@@ -97,5 +97,10 @@ public class ActionQuestObjective implements QuantitativeObjective {
     @Override
     public void setNextObjective(QuestObjective nextObjective) {
         this.nextObjective = nextObjective;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
