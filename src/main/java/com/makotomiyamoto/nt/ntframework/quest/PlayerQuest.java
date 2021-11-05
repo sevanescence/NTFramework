@@ -1,8 +1,10 @@
 package com.makotomiyamoto.nt.ntframework.quest;
 
+import com.makotomiyamoto.nt.ntframework.quest.handler.QuestHandler;
 import com.makotomiyamoto.nt.ntframework.quest.objective.QuestObjective;
 import com.makotomiyamoto.nt.ntframework.quest.reward.RewardFailedException;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Describes a quest currently occupied by a player.
@@ -30,6 +32,8 @@ public interface PlayerQuest {
      */
     QuestObjective getCurrentObjective();
 
+    QuestHandler<? extends QuestObjective> getQuestHandler();
+
     /**
      * Sets the current quest objective to the next objective of a quest.
      * If the next objective does not exist (i.e., it is null) then it
@@ -38,4 +42,6 @@ public interface PlayerQuest {
      * @throws RewardFailedException if the objective reward cannot be granted
      */
     boolean advanceObjective() throws RewardFailedException;
+
+    void initialize(JavaPlugin plugin);
 }

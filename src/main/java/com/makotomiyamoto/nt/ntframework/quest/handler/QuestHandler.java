@@ -22,7 +22,7 @@ public interface QuestHandler<ObjectiveType extends QuestObjective> {
      * Gets the list of (assumed to be) registered event listeners. It is not
      * recommended that you add event listeners to this list unless you know
      * they are registered. To add an event to the list and register it, use
-     * {@link #registerListener(Listener)} instead.
+     * {@link #registerListener(Listener, JavaPlugin)} instead.
      * @return a list of {@link Listener Listeners}
      */
     List<Listener> getListeners();
@@ -45,4 +45,6 @@ public interface QuestHandler<ObjectiveType extends QuestObjective> {
      * Unregisters all listeners in {@link #getListeners()}
      */
     void unregisterListeners();
+
+    void initialize(JavaPlugin plugin);
 }

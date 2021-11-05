@@ -22,19 +22,23 @@ public class QDebugCommandExecutor implements CommandExecutor {
             return false;
         }
 
-        Quest debug_GettingStarted = NTFramework.getQuests().get("debug_GettingStarted");
-        if (debug_GettingStarted == null) {
-            sender.sendMessage("For some reason, debug_GettingStarted does not exist. Ditto.");
-            return false;
-        }
-        ActivePlayerQuest quest = new ActivePlayerQuest("debug_GettingStarted", ((Player) sender));
-        NTFramework.getActiveQuests().put(((Player) sender).getUniqueId(), List.of(quest));
-        // TODO handle this part in some sort of quest init event
-        ItemPickupQuestObjective objective = (ItemPickupQuestObjective) quest.getCurrentObjective();
-        ItemEventListener itemEventListener = new ItemEventListener(quest, objective.getItemStack());
-        objective.setQuantitativeQuestHandler(new QuantitativeQuestHandler(objective));
-        objective.getQuantitativeQuestHandler().registerListener(itemEventListener, NTFramework.getInstance());
-        sender.sendMessage("Pick up a %s".formatted(Objects.requireNonNull(objective.getItemStack().getItemMeta()).getDisplayName()));
+        ActivePlayerQuest playerQuest = new ActivePlayerQuest("debug_GettingStarted", (Player) sender);
+        playerQuest.initialize(NTFramework.getInstance());
+        sender.sendMessage("Quest started: " + playerQuest.getQuest().getTitle());
+        sender.sendMessage("Objective: " + playerQuest.getCurrentObjective().getDescription());
+//        Quest debug_GettingStarted = NTFramework.getQuests().get("debug_GettingStarted");
+//        if (debug_GettingStarted == null) {
+//            sender.sendMessage("For some reason, debug_GettingStarted does not exist. Ditto.");
+//            return false;
+//        }
+//        ActivePlayerQuest quest = new ActivePlayerQuest("debug_GettingStarted", ((Player) sender));
+//        NTFramework.getActiveQuests().put(((Player) sender).getUniqueId(), List.of(quest));
+//        // TODO handle this part in some sort of quest init event
+//        ItemPickupQuestObjective objective = (ItemPickupQuestObjective) quest.getCurrentObjective();
+//        ItemEventListener itemEventListener = new ItemEventListener(quest, objective.getItemStack());
+//        objective.setQuantitativeQuestHandler(new QuantitativeQuestHandler(objective));
+//        objective.getQuantitativeQuestHandler().registerListener(itemEventListener, NTFramework.getInstance());
+//        sender.sendMessage("Pick up a %s".formatted(Objects.requireNonNull(objective.getItemStack().getItemMeta()).getDisplayName()));
 
         return true;
     }

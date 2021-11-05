@@ -34,7 +34,7 @@ public final class NTFramework extends JavaPlugin {
         Quest quest = new Quest();
         quest.setTitle("Getting Started");
         quest.setDescription("This is the beginning quest.");
-        ItemPickupQuestObjective objective = new ItemPickupQuestObjective("Pick up wooden sword", "Description :)", 1);
+        ItemPickupQuestObjective objective = new ItemPickupQuestObjective("Wooden sword :)", "Pick up a wooden sword.", 1);
         objective.setItemStack(new ItemStack(Material.WOODEN_SWORD, 1));
         quest.setHead(objective);
         quests.put("debug_GettingStarted", quest);

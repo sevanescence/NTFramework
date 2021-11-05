@@ -37,4 +37,9 @@ public class QuantitativeQuestHandler implements QuestHandler<QuantitativeObject
     public void unregisterListeners() {
         listeners.forEach(HandlerList::unregisterAll);
     }
+
+    @Override
+    public void initialize(JavaPlugin plugin) {
+
+    }
 }
