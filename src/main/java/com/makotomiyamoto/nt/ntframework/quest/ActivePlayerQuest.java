@@ -13,18 +13,27 @@ public class ActivePlayerQuest implements PlayerQuest {
     public ActivePlayerQuest(String questKey, Player player) {
         this.questKey = questKey;
         this.player = player;
-        this.currentObjective = getQuest().getHead();
+        try {
+            this.currentObjective = (QuestObjective) getQuest().getHead().clone();
+        } catch (CloneNotSupportedException ignored) {
+            System.out.println("Clone error lol");
+        }
     }
 
     public ActivePlayerQuest(String questKey, Player player, QuestObjective currentObjective) {
         this.questKey = questKey;
         this.player = player;
-        this.currentObjective = currentObjective;
+
+        try {
+            this.currentObjective = (QuestObjective) currentObjective.clone();
+        } catch (CloneNotSupportedException ignored) {
+            System.out.println("Clone error lol");
+        }
     }
 
     @Override
     public Quest getQuest() {
-        return NTFramework.quests.get(questKey);
+        return NTFramework.getQuests().get(questKey);
     }
 
     @Override

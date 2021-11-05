@@ -1,9 +1,14 @@
 name: NTFramework
 version: '${version}'
 main: com.makotomiyamoto.nt.ntframework.NTFramework
-api-version: 1.17
+api-version: 1.16
 prefix: NebulaToxin
 load: STARTUP
 authors: [ MakotoMiyamoto ]
 description: Game mechanics framework for NebulaToxin.
 website: https://makotomiyamoto.com
+commands:
+  qdebug:
+    description: start the debug_GettingStarted quest for testing
+    aliases:
+      - qd
