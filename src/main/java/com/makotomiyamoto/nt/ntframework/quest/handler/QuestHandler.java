@@ -45,6 +45,4 @@ public interface QuestHandler<ObjectiveType extends QuestObjective> {
      * Unregisters all listeners in {@link #getListeners()}
      */
     void unregisterListeners();
-
-    void initialize(JavaPlugin plugin);
 }
