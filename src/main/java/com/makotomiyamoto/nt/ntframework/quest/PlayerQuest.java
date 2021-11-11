@@ -43,5 +43,7 @@ public interface PlayerQuest {
      */
     boolean advanceObjective() throws RewardFailedException;
 
-    void initialize(JavaPlugin plugin);
+    void initialize();
+
+    void uninitialize();
 }

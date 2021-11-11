@@ -15,7 +15,7 @@ public class ActivePlayerQuest implements PlayerQuest {
     private final String questKey;
     private final Player player;
     private QuestObjective currentObjective;
-    private QuestHandler<? extends QuestObjective> questHandler;
+    private transient QuestHandler<? extends QuestObjective> questHandler;
 
     public ActivePlayerQuest(String questKey, Player player) {
         this(questKey, player, NTFramework.getQuests().get(questKey).getHead());
@@ -27,9 +27,24 @@ public class ActivePlayerQuest implements PlayerQuest {
 
         try {
             this.currentObjective = (QuestObjective) currentObjective.clone();
+            for (QuestObjective iterator = this.currentObjective; iterator.getNextObjective() != null; iterator = iterator.getNextObjective()) {
+                iterator.setNextObjective((QuestObjective) iterator.getNextObjective().clone());
+            }
         } catch (CloneNotSupportedException ignored) {
             System.out.println("Clone error lol");
         }
+    }
+
+    /**
+     * funny factory method to handle initialization on the back end
+     * @param questKey The fact that you think I care about documentation here is laughable
+     * @param player You know what these parameters are for.
+     * @return an {@link ActivePlayerQuest}
+     */
+    public static ActivePlayerQuest createInitializedActiveQuest(String questKey, Player player) {
+        ActivePlayerQuest quest = new ActivePlayerQuest(questKey, player);
+        quest.initialize();
+        return quest;
     }
 
     @Override
@@ -57,18 +72,27 @@ public class ActivePlayerQuest implements PlayerQuest {
         if (currentObjective.getQuestCompletionReward() != null) {
             QuestUtils.grantQuestReward(currentObjective.getQuestCompletionReward(), player);
         }
-
         currentObjective = currentObjective.getNextObjective();
+
+        if (currentObjective != null) {
+            this.uninitialize();
+        }
         return currentObjective != null;
     }
 
     @Override
-    public void initialize(JavaPlugin plugin) {
+    public void initialize() {
         if (getCurrentObjective() instanceof ItemPickupQuestObjective) {
             this.questHandler = new QuantitativeQuestHandler((QuantitativeObjective) getCurrentObjective());
-            this.questHandler.registerListener(new ItemEventListener(this, ((ItemPickupQuestObjective) getCurrentObjective()).getItemStack()), plugin);
+            this.questHandler.registerListener(new ItemEventListener(this, ((ItemPickupQuestObjective) getCurrentObjective()).getItemStack()), NTFramework.getInstance());
         } else {
             System.out.println("Quest objective type not yet supported: " + getCurrentObjective().getClass().getName());
         }
+    }
+
+    @Override
+    public void uninitialize() {
+        questHandler.unregisterListeners();
+        this.initialize();
     }
 }

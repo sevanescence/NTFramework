@@ -1,11 +1,13 @@
 package com.makotomiyamoto.nt.ntframework.commands;
 
 import com.makotomiyamoto.nt.ntframework.NTFramework;
+import com.makotomiyamoto.nt.ntframework.lib.GsonManager;
 import com.makotomiyamoto.nt.ntframework.quest.ActivePlayerQuest;
 import com.makotomiyamoto.nt.ntframework.quest.Quest;
 import com.makotomiyamoto.nt.ntframework.quest.handler.ItemEventListener;
 import com.makotomiyamoto.nt.ntframework.quest.handler.QuantitativeQuestHandler;
 import com.makotomiyamoto.nt.ntframework.quest.objective.ItemPickupQuestObjective;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,10 +24,10 @@ public class QDebugCommandExecutor implements CommandExecutor {
             return false;
         }
 
-        ActivePlayerQuest playerQuest = new ActivePlayerQuest("debug_GettingStarted", (Player) sender);
-        playerQuest.initialize(NTFramework.getInstance());
+        ActivePlayerQuest playerQuest = ActivePlayerQuest.createInitializedActiveQuest("debug_GettingStarted", (Player) sender);
         sender.sendMessage("Quest started: " + playerQuest.getQuest().getTitle());
         sender.sendMessage("Objective: " + playerQuest.getCurrentObjective().getDescription());
+        Bukkit.getLogger().warning("Debug: " + GsonManager.getGson().toJson(playerQuest.getCurrentObjective()));
 //        Quest debug_GettingStarted = NTFramework.getQuests().get("debug_GettingStarted");
 //        if (debug_GettingStarted == null) {
 //            sender.sendMessage("For some reason, debug_GettingStarted does not exist. Ditto.");

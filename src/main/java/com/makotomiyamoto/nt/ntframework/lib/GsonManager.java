@@ -1,5 +1,6 @@
 package com.makotomiyamoto.nt.ntframework.lib;
 
+
 import com.google.gson.*;
 
 import java.lang.reflect.ParameterizedType;

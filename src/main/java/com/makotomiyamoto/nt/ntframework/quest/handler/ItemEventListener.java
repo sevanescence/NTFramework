@@ -3,6 +3,7 @@ package com.makotomiyamoto.nt.ntframework.quest.handler;
 import com.makotomiyamoto.nt.ntframework.quest.ActivePlayerQuest;
 import com.makotomiyamoto.nt.ntframework.quest.objective.ItemPickupQuestObjective;
 import com.makotomiyamoto.nt.ntframework.quest.objective.QuantitativeObjective;
+import com.makotomiyamoto.nt.ntframework.quest.reward.ItemQuestCompletionReward;
 import com.makotomiyamoto.nt.ntframework.quest.reward.RewardFailedException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -36,6 +37,24 @@ public class ItemEventListener implements Listener {
             try {
                 if (! this.activePlayerQuest.advanceObjective()) {
                     event.getEntity().sendMessage("End of quest.");
+                    event.getEntity().sendMessage("Rewards: ");
+                    if (this.activePlayerQuest.getQuest().getQuestCompletionReward() instanceof ItemQuestCompletionReward) {
+                        ItemQuestCompletionReward reward = (ItemQuestCompletionReward) this.activePlayerQuest.getQuest().getQuestCompletionReward();
+                        reward.getRewards().forEach(itemReward -> {
+                            event.getEntity().sendMessage("x" + itemReward.getItemStack().getAmount() + " " + itemReward.getItemStack().getType());
+                            ((Player) event.getEntity()).getInventory().addItem(itemReward.getItemStack());
+                        });
+                    }
+//                    this.activePlayerQuest.getQuest().getQuestCompletionReward().getRewards().forEach(iReward -> {
+//                        System.out.println("reward");
+//                        if (iReward instanceof ItemQuestCompletionReward) {
+//                            System.out.println("item quest reward");
+//                            ItemQuestCompletionReward reward = (ItemQuestCompletionReward) iReward;
+//                            reward.getRewards().forEach(itemReward -> event.getEntity().sendMessage("x" + itemReward.getItemStack().getAmount() + " " + itemReward.getItemStack().getType()));
+//                        }
+//                    });
+                } else {
+                    event.getEntity().sendMessage("New objective: " + this.activePlayerQuest.getCurrentObjective().getDescription());
                 }
             } catch (RewardFailedException ignored) {
                 System.out.println("Error: failed to reward.");

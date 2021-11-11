@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
 }
 
 group = 'com.makotomiyamoto.nt'
@@ -15,10 +16,19 @@ repositories {
         name = 'sonatype'
         url = 'https://oss.sonatype.org/content/groups/public/'
     }
+    maven {
+        name = 'gson'
+        url = 'https://mvnrepository.com/artifact/com.google.code.gson/gson'
+    }
 }
 
 dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'com.google.code.gson:gson:2.8.9'
+}
+
+shadowJar {
+    archiveClassifier.set('')
 }
 
 def targetJavaVersion = 15
